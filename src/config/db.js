@@ -1,0 +1,26 @@
+const { Pool } = require('pg')
+const {
+    DB_HOST,
+    DB_NAME,
+    DB_PASS,
+    DB_POST,
+    DB_USER
+} = require('../helpers')
+
+const db = new Pool({
+    host: DB_HOST,
+    user: DB_USER,
+    password: DB_PASS,
+    database: DB_NAME,
+    port: DB_POST
+})
+
+db.connect((err) => {
+    if (err) {
+      console.log(err)
+    } else {
+      console.log('database connected')
+    }
+  })
+  
+  module.exports = db

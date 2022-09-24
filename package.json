@@ -1,0 +1,34 @@
+{
+  "name": "hirejob-backend",
+  "version": "1.0.0",
+  "description": "api for hirejob web application",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/20000710/HireJob-App-Backend.git"
+  },
+  "author": "zaki khairi ziwar",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/20000710/HireJob-App-Backend/issues"
+  },
+  "homepage": "https://github.com/20000710/HireJob-App-Backend#readme",
+  "devDependencies": {
+    "eslint": "^8.24.0",
+    "nodemon": "^2.0.20"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.2",
+    "express": "^4.18.1",
+    "helmet": "^6.0.0",
+    "jsonwebtoken": "^8.5.1",
+    "pg": "^8.8.0",
+    "uuid": "^9.0.0",
+    "xss-clean": "^0.1.1"
+  }
+}
