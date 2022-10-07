@@ -150,7 +150,7 @@ const workerController = {
   },
   workersUpdatePhoto: async (req, res) => {
     try {
-      const id = req.APP_DATA.tokenDecoded.id;
+      const { id } = req.params;
       let photo;
       if (req.file) {
         const usersCheck = await workersModel.detail(id);
