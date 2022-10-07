@@ -20,6 +20,6 @@ router
   .get('/workers', getAllWorkers) // to get all users
   .get('/workers/:id', jwtAuth, workersDetail) // to get users detail by id
   .put('/workers', jwtAuth, validationResult, workersUpdate) // to update information users
-  .put('/workers-photo', jwtAuth, upload, workersUpdatePhoto)
+  .put('/workers-photo/:id', jwtAuth, upload, workersUpdatePhoto)
 
   module.exports = router;
