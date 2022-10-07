@@ -59,8 +59,8 @@ const authController = {
         try {
             const { email, password } = req.body;
             const isRegistered = await authModelRecruiter.findby('email', email)
-            console.log('isRegistered: ', isRegistered)
-            console.log('req: ', req.body)
+            // console.log('isRegistered: ', isRegistered)
+            // console.log('req: ', req.body)
             if (isRegistered.rowCount > 0) {
                 bcrypt
                     .compare(password, isRegistered.rows[0].password)
