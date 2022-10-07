@@ -177,7 +177,7 @@ const workerController = {
               photo,
             };
             await workersModel.workersUpdatePhotoData(data);
-            const newData = await usersModel.detail(id);
+            const newData = await workersModel.detail(id);
             success(res, {
               code: 200,
               status: 'success',
