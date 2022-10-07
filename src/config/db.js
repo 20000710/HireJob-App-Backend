@@ -5,7 +5,7 @@ const {
     DB_PASS,
     DB_POST,
     DB_USER
-} = require('../helpers')
+} = require('../helpers/env')
 
 const db = new Pool({
     host: DB_HOST,
