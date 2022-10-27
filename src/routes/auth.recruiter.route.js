@@ -9,7 +9,7 @@ const {
 const router = express.Router();
 
 router
-  .post('/recruiter/register',register)
-  .post('/recruiter/login', login)
+  .post('/register',register)
+  .post('/login', login)
 
 module.exports = router;

@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 const helmet = require('helmet');
 const { failed } = require('./src/helpers/response');
 const { PORT } = require('./src/helpers/env');
+const mainRouter = require("./src/routes/index");
 const app = express();
 app.use(xssClean());
 app.use(cors());
@@ -14,20 +15,22 @@ app.use(
         crossOriginResourcePolicy: false,
     }),
 );
+
+app.use("/api/v1", mainRouter);
 app.use(express.static('public'));
 app.use(express.urlencoded({ extended: true }));
 
 // route here
-app.use(require('./src/routes/auth.worker.route'))
-app.use(require('./src/routes/auth.recruiter.route'))
-app.use(require('./src/routes/worker.route'))
-app.use(require('./src/routes/experience.route'))
-app.use(require('./src/routes/portfolio.route'))
+// app.use(require('./src/routes/auth.worker.route'))
+// app.use(require('./src/routes/auth.recruiter.route'))
+// app.use(require('./src/routes/worker.route'))
+// app.use(require('./src/routes/experience.route'))
+// app.use(require('./src/routes/portfolio.route'))
 
 
-app.get('/', (req, res) => {
-    res.json(`Hire Job Api v1.0`);
-});
+// app.get('/', (req, res) => {
+//     res.json(`Hire Job Api v1.0`);
+// });
 
 app.all('*', (req, res) => {
     failed(res, {

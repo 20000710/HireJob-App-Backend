@@ -17,9 +17,9 @@ const upload = require('../middlewares/upload');
 const router = express.Router();
 
 router
-  .get('/workers', getAllWorkers) // to get all users
-  .get('/workers/:id', jwtAuth, workersDetail) // to get users detail by id
-  .put('/workers', jwtAuth, validationResult, workersUpdate) // to update information users
-  .put('/workers-photo/:id', jwtAuth, upload, workersUpdatePhoto)
+  .get('/', getAllWorkers) // to get all users
+  .get('/:id', jwtAuth, workersDetail) // to get users detail by id
+  .put('/', jwtAuth, validationResult, workersUpdate) // to update information users
+  .put('/upload/:id', jwtAuth, upload, workersUpdatePhoto)
 
   module.exports = router;

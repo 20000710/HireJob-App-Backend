@@ -1,19 +1,15 @@
 {
-    "version": 2,
+    "version": 2 ,
     "builds": [
-        {
-            "src": "index.js",
-            "use": "@now/node"
-        }
+      {
+        "src": "index.js",
+        "use": "@now/node"
+      }
     ],
     "routes": [
-        {
-            "src": "/workers",
-            "methods": [
-                "GET",
-                "PUT"
-            ],
-            "dest": "/routes/worker.route.js"
-        }
+      {
+        "src": "/(.*)",
+        "dest": "index.js"
+      }
     ]
-}
+  }
