@@ -15,6 +15,7 @@ app.use(
     }),
 );
 app.use(express.static('public'));
+app.use(express.urlencoded({ extended: true }));
 
 // route here
 app.use(require('./src/routes/auth.worker.route'))
