@@ -150,7 +150,7 @@ const workerController = {
   },
   workersUpdatePhoto: async (req, res) => {
     try {
-      const id = req.APP_DATA.tokenDecoded.id;
+      const { id } = req.params;
       let photo;
       if (req.file) {
         const usersCheck = await workersModel.detail(id);
@@ -177,7 +177,7 @@ const workerController = {
               photo,
             };
             await workersModel.workersUpdatePhotoData(data);
-            const newData = await usersModel.detail(id);
+            const newData = await workersModel.detail(id);
             success(res, {
               code: 200,
               status: 'success',
