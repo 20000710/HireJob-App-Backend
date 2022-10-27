@@ -17,10 +17,10 @@ const upload = require('../middlewares/upload');
 const router = express.Router();
 
 router
-  .get('/portfolio', jwtAuth, getAllPortfolio) // to get all portfolio
-  .get('/portfolio/:id', jwtAuth, portfolioDetail) // to get portfolio detail by id
-  .post('/portfolio', jwtAuth, upload, portfolioInsert) // to get create portfolio detail by id
-  .put('/portfolio/:id', jwtAuth, upload, validationResult, portfolioUpdate) // to update information portfolio
-  .delete('/portfolio/:id', jwtAuth, portfolioDelete) // to delete portfolio by id
+  .get('/', jwtAuth, getAllPortfolio) // to get all portfolio
+  .get('/:id', jwtAuth, portfolioDetail) // to get portfolio detail by id
+  .post('/', jwtAuth, upload, portfolioInsert) // to get create portfolio detail by id
+  .put('/:id', jwtAuth, upload, validationResult, portfolioUpdate) // to update information portfolio
+  .delete('/:id', jwtAuth, portfolioDelete) // to delete portfolio by id
 
   module.exports = router;
