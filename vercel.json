@@ -1,15 +1,15 @@
 {
-    "version": 2 ,
     "builds": [
       {
         "src": "index.js",
-        "use": "@now/node"
+        "use": "@now/node",
+        "config": { "excludeFiles": "public/**" }
       }
     ],
     "routes": [
       {
         "src": "/(.*)",
-        "dest": "index.js"
+        "dest": "/index.js"
       }
     ]
   }
