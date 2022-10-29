@@ -120,7 +120,6 @@ const workerController = {
           domicile,
           workplace,
           description,
-          skills
         };
         await workersModel.workersUpdateData(data);
         const newData = await workersModel.detail(id);
@@ -155,7 +154,7 @@ const workerController = {
       if (req.file) {
         const usersCheck = await workersModel.detail(id);
         if (usersCheck.rowCount > 0) {
-          if (usersCheck.rows[0].photo == 'user_default.png') {
+          if (usersCheck.rows[0].photo == null) {
             photo = req.file.filename;
             const data = {
               id,
