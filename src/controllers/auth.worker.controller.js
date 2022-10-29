@@ -18,8 +18,7 @@ const authController = {
                 const workplace = '';
                 const job_desk = '';
                 const description = '';
-                const skills = '';
-                const photo = 'user_default.png';
+                const photo = null;
 
                 const data = {
                     id,
@@ -31,7 +30,6 @@ const authController = {
                     workplace,
                     job_desk,
                     description,
-                    skills,
                     photo,
                     verifyToken
                 };
