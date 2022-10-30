@@ -30,6 +30,32 @@ module.exports = {
           res.status(code).json(response)      
     },
 
+    successLogin: (res, payload) => {
+      const {
+        code,
+        status,
+        message,
+        name,
+        token = false,
+      } = payload
+
+      const response = {
+        code: code || 200,
+        status: status || 'success',
+        message,
+        name,
+        token,
+      }
+
+      // sucess with token
+      if (token) {
+        response.token = token
+        delete response.data
+      }
+  
+      res.status(code).json(response)
+    },
+
     failed: (res, payload) => {
         const  {code, status, message, error} = payload
         
