@@ -14,7 +14,7 @@ const authController = {
                 const id = uuidv4();
                 const verifyToken = crypto.randomBytes(16).toString('hex');
                 const passwordHashed = await bcrypt.hash(password, 10);
-                const photo = 'user_default.png';
+                const photo = null;
 
                 const data = {
                     id,
