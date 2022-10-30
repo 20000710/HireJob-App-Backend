@@ -68,7 +68,7 @@ const authController = {
                             const token = await jwtToken({
                                 id: isRegistered.rows[0].id,
                             });
-                            success(res, {
+                            successLogin(res, {
                                 code: 200,
                                 status: 'success',
                                 message: 'login success',

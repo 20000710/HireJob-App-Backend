@@ -2,7 +2,7 @@ const bcrypt = require('bcryptjs');
 const { v4: uuidv4 } = require('uuid');
 const crypto = require('crypto');
 const jwtToken = require('../helpers/generateJWTToken');
-const { success, failed } = require('../helpers/response');
+const { success, failed, successLogin } = require('../helpers/response');
 const authModelWorker = require('../models/auth.worker.models');
 
 const authController = {
@@ -74,7 +74,7 @@ const authController = {
                             const token = await jwtToken({
                                 id: isRegistered.rows[0].id,
                             });
-                            success(res, {
+                            successLogin(res, {
                                 code: 200,
                                 status: 'success',
                                 message: 'login success',
