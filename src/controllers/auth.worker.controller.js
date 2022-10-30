@@ -65,8 +65,7 @@ const authController = {
         try {
             const { email, password } = req.body;
             const isRegistered = await authModelWorker.findby('email', email)
-            console.log('isRegistered: ', isRegistered)
-            console.log('req: ', req.body)
+            
             if (isRegistered.rowCount > 0) {
                 bcrypt
                     .compare(password, isRegistered.rows[0].password)
@@ -79,6 +78,7 @@ const authController = {
                                 code: 200,
                                 status: 'success',
                                 message: 'login success',
+                                name: isRegistered.rows[0].name,
                                 token: token,
                             });
                         } else {
