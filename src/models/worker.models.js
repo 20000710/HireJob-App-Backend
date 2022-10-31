@@ -45,11 +45,11 @@ const workerModel = {
         });
     },
     workersUpdateData: (data) => {
-        const { id, name, job_desk, domicile, workplace, description } = data;
+        const { id, name, job_desk, domicile, workplace, description, skill_id } = data;
         return new Promise((resolve, reject) => {
             db.query(
                 `UPDATE worker SET name='${name}',job_desk='${job_desk}', domicile='${domicile}', 
-            workplace='${workplace}', description='${description}' 
+            workplace='${workplace}', description='${description}', skill_id='${skill_id}'
             WHERE id='${id}'`,
                 (err, res) => {
                     if (err) {

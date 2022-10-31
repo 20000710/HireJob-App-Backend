@@ -13,12 +13,13 @@ const authModelWorker = {
             job_desk,
             description,
             photo,
+            skill_id,
             verifyToken
         } = data;
         return new Promise((resolve, reject) => {
             db.query(
-                `INSERT INTO worker(id, name, email, phone, password, workplace, job_desk, description, photo, verify_token, domicile)
-                VALUES('${id}', '${name}', '${email}', '${phone}', '${passwordHashed}', '${workplace}', '${job_desk}', '${description}', '${photo}', '${verifyToken}', '${domicile}')`,
+                `INSERT INTO worker(id, name, email, phone, password, workplace, job_desk, description, photo, verify_token, domicile, skill_id)
+                VALUES('${id}', '${name}', '${email}', '${phone}', '${passwordHashed}', '${workplace}', '${job_desk}', '${description}', '${photo}', '${verifyToken}', '${domicile}', '${skill_id}')`,
                 (err, res) => {
                     if (err) {
                         reject(err);
