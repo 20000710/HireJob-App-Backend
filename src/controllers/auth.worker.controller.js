@@ -18,6 +18,7 @@ const authController = {
                 const workplace = '';
                 const job_desk = '';
                 const description = '';
+                const skill_id = '';
                 const photo = null;
 
                 const data = {
@@ -31,6 +32,7 @@ const authController = {
                     job_desk,
                     description,
                     photo,
+                    skill_id,
                     verifyToken
                 };
                 await authModelWorker.register(data);

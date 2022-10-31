@@ -35,7 +35,7 @@ const skillModel = {
     },
     detail: (id) => {
         return new Promise((resolve, reject) => {
-            db.query(`SELECT * FROM skills WHERE user_id='${id}'`, (err, res) => {
+            db.query(`SELECT * FROM skills WHERE id='${id}'`, (err, res) => {
                 if (err) {
                     reject(err);
                 } else {
