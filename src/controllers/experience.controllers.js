@@ -110,17 +110,18 @@ const experienceController = {
   },
   experienceInsert: async (req, res) => {
     try {
-      const { position, company_name, started, ended, description, user_id } = req.body;
+      const { position, company_name, started, ended, description } = req.body;
       const id = uuidv4();
-      // const photo = req.file.filename;
+      const company_photo = req.file.filename;
+      console.log('company_photo: ', company_photo);
       const data = {
         id,
         position,
         company_name,
         started,
         ended,
-        description,
-        user_id
+        company_photo,
+        description
       };
       console.log('data: ', data)
       await experienceModel.insertExperience(data);
@@ -142,7 +143,7 @@ const experienceController = {
   experienceUpdate: async (req, res) => {
     try {
       const { id } = req.params;
-      const { position, company_name, started, ended, description, user_id } = req.body;
+      const { position, company_name, started, ended, company_photo, description } = req.body;
       const experienceCheck = await experienceModel.detail(id);
       if (experienceCheck.rowCount > 0) {
         const data = {
@@ -151,8 +152,8 @@ const experienceController = {
           company_name,
           started,
           ended,
-          description,
-          user_id
+          company_photo,
+          description
         };
         await experienceModel.updateExperience(data);
         success(res, {
