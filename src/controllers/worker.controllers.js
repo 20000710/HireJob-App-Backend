@@ -110,7 +110,7 @@ const workerController = {
   workersUpdate: async (req, res) => {
     try {
       const id = req.APP_DATA.tokenDecoded.id;
-      const { name, job_desk, domicile, workplace, description, skill_id } = req.body;
+      const { name, job_desk, domicile, workplace, description, skill_id, portfolio_id, experience_id } = req.body;
       const workerCheck = await workersModel.detail(id);
       if (workerCheck.rowCount > 0) {
         const data = {
@@ -120,7 +120,9 @@ const workerController = {
           domicile,
           workplace,
           description,
-          skill_id
+          skill_id,
+          portfolio_id,
+          experience_id,
         };
         await workersModel.workersUpdateData(data);
         const newData = await workersModel.detail(id);
