@@ -49,7 +49,8 @@ const experienceModel = {
         return new Promise ((resolve, reject) =>
             db.query(`
                 INSERT INTO experience (id, position, company_name, started, ended, photo, description) 
-                VALUES ('${id}', '${position}', '${company_name}', '${started}', '${ended}', '${photo}', '${description}' )`, (error,result) => {
+                VALUES ('${id}', '${position}', '${company_name}', '${started}', '${ended}', '${photo}', '${description}')`, 
+                (error,result) => {
                 if(!error){
                     resolve(result)
                 }else{
@@ -63,7 +64,7 @@ const experienceModel = {
         return new Promise((resolve, reject) => {
             db.query(
             `UPDATE experience SET position='${position}',company_name='${company_name}', 
-            started='${started}', ended='${ended}', photo=${photo}, description='${description}'
+            started='${started}', ended='${ended}', photo='${photo}', description='${description}'
             WHERE id='${id}'`,
                 (err, res) => {
                     if (err) {

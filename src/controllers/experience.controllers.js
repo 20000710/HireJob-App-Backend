@@ -112,7 +112,7 @@ const experienceController = {
     try {
       const { position, company_name, started, ended, description } = req.body;
       const id = uuidv4();
-      const company_photo = req.file.filename;
+      const photo = req.file.filename;
       console.log('company_photo: ', company_photo);
       const data = {
         id,
@@ -120,7 +120,7 @@ const experienceController = {
         company_name,
         started,
         ended,
-        company_photo,
+        photo,
         description
       };
       console.log('data: ', data)
@@ -143,8 +143,9 @@ const experienceController = {
   experienceUpdate: async (req, res) => {
     try {
       const { id } = req.params;
-      const { position, company_name, started, ended, company_photo, description } = req.body;
+      const { position, company_name, started, ended, description } = req.body;
       const experienceCheck = await experienceModel.detail(id);
+      const photo = req.file.filename;
       if (experienceCheck.rowCount > 0) {
         const data = {
           id,
@@ -152,7 +153,7 @@ const experienceController = {
           company_name,
           started,
           ended,
-          company_photo,
+          photo,
           description
         };
         await experienceModel.updateExperience(data);
