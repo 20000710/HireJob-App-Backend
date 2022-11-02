@@ -113,7 +113,6 @@ const experienceController = {
       const { position, company_name, started, ended, description } = req.body;
       const id = uuidv4();
       const photo = req.file.filename;
-      console.log('company_photo: ', company_photo);
       const data = {
         id,
         position,
