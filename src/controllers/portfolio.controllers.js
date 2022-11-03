@@ -11,7 +11,7 @@ const portfolioController = {
       const pageValue = page ? Number(page) : 1;
       const limitValue = limit ? Number(limit) : 5;
       const offsetValue = (pageValue - 1) * limitValue;
-      const sortQuery = sort ? sort : 'name';
+      const sortQuery = sort ? sort : 'portfolio_name';
       const modeQuery = mode ? mode : 'ASC';
       if (typeof Number(page) == 'number' && typeof Number(limit) == 'number') {
         const allData = await portfolioModel.allData()
@@ -32,7 +32,7 @@ const portfolioController = {
               currentPage: pageValue,
               dataPerPage: dataPerPage,
               totalPage: Math.ceil(result.rowCount / limitValue),
-            };
+            };            
             success(res, {
               code: 200,
               status: 'success',
@@ -142,9 +142,10 @@ const portfolioController = {
   portfolioUpdate: async (req, res) => {
     try {
       const { id } = req.params;
-      const { name, link, type, description, user_id} = req.body;
+      const { name, link, type, description} = req.body;
       const portfolioCheck = await portfolioModel.detail(id);
       const photo = req.file.filename;
+      console.log('portfolioCheck: ', portfolioCheck);
       if (portfolioCheck.rowCount > 0) {
         const data = {
           id,
@@ -155,6 +156,7 @@ const portfolioController = {
           description,
           user_id
         };
+
         await portfolioModel.updatePortfolio(data);
         success(res, {
           code: 200,
@@ -172,6 +174,64 @@ const portfolioController = {
         return;
       }
     } catch (error) {
+      failed(res, {
+        code: 500,
+        status: 'error',
+        message: error.message,
+        error: [],
+      });
+    }
+  },
+  portfolioAdd: async (req, res) => {
+    try {
+      const { id } = req.params;
+      const { name, link, type, porto_description } = req.body;
+      const portfolioCheck = await portfolioModel.detail(id);
+      const photo = req.file.filename;
+      if (portfolioCheck.rowCount > 0) {
+        const previousData = {
+          name: "",
+          link: "",
+          type: "",
+          photo: "",
+          porto_description: ""          
+        }
+        console.log('rows: ', portfolioCheck.rows); 
+        portfolioCheck.rows.map(val => {
+          previousData.name = val.portfolio_name;
+          previousData.link = val.link;
+          previousData.type = val.type;
+          previousData.photo = val.photo;
+          previousData.porto_description = val.porto_description;
+        })
+        console.log('previousData: ', previousData);
+        const data = {
+          id,
+          name: previousData.name.concat(",", name),
+          link: previousData.link.concat(",", link),
+          type: previousData.type.concat(",", type), 
+          photo: previousData.photo.concat(",", photo),
+          porto_description: previousData.porto_description.concat(",", porto_description)
+        };
+      
+        await portfolioModel.updatePortfolio(data);
+        success(res, {
+          code: 200,
+          status: 'success',
+          message: 'Success update portfolio',
+          data: portfolioCheck.rows[0],
+        });
+      } else {
+        failed(res, {
+          code: 404,
+          status: 'error',
+          message: `portfolio with id ${id} not found`,
+          error: [],
+        });
+        return;
+      }
+    } catch (error) {
+      console.log('error: ', error);
       failed(res, {
         code: 500,
         status: 'error',

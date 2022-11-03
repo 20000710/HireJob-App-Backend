@@ -18,10 +18,10 @@ const authController = {
                 const workplace = '';
                 const job_desk = '';
                 const description = '';
-                const skill_id = '';
+                const skills = '';
                 const portfolio_id = '';
                 const experience_id = '';
-                const photo = null;
+                const photo = '';
 
                 const data = {
                     id,
@@ -34,7 +34,7 @@ const authController = {
                     job_desk,
                     description,
                     photo,
-                    skill_id,
+                    skills,
                     portfolio_id,
                     experience_id,
                     verifyToken
@@ -59,6 +59,7 @@ const authController = {
                 return;
             }
         } catch (error) {
+            console.log(error);
             failed(res, {
                 code: 500,
                 status: 'error',

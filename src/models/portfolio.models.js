@@ -21,7 +21,7 @@ const portfolioModel = {
     ) => {
         return new Promise((resolve, reject) => {
             db.query(
-                `SELECT * FROM portfolio WHERE LOWER(name) LIKE '%${searchQuery}%'
+                `SELECT * FROM portfolio WHERE LOWER(portfolio_name) LIKE '%${searchQuery}%'
           ORDER BY ${sortQuery} ${modeQuery} LIMIT ${limitValue} OFFSET ${offsetValue}`,
                 (err, res) => {
                     if (err) {
@@ -45,10 +45,10 @@ const portfolioModel = {
         });
     },
     insertPortfolio: (data) => {
-        const {id, name, link, type, photo, description, user_id} = data
+        const {id, name, link, type, photo, description} = data
         return new Promise ((resolve, reject) =>
             db.query(`
-            INSERT INTO portfolio (id, name, link, type, photo, description, user_id) 
+            INSERT INTO portfolio (id, portfolio_name, link, type, photo, porto_description) 
             VALUES ('${id}', '${name}', '${link}', '${type}', '${photo}', 
             '${description}', '${user_id}')`, (error,result) => {
                 if(!error){
@@ -60,11 +60,11 @@ const portfolioModel = {
         );
     },
     updatePortfolio: (data) => {
-        const {id, name, link, type, photo, description, user_id} = data
+        const {id, name, link, type, photo, porto_description} = data
         return new Promise((resolve, reject) => {
             db.query(
-            `UPDATE portfolio SET name='${name}',link='${link}', 
-            type='${type}', photo='${photo}', description='${description}', user_id='${user_id}' 
+            `UPDATE portfolio SET portfolio_name='${name}',link='${link}', 
+            type='${type}', photo='${photo}', porto_description='${porto_description}' 
             WHERE id='${id}'`,
                 (err, res) => {
                     if (err) {

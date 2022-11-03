@@ -180,6 +180,65 @@ const experienceController = {
       });
     }
   },
+  experienceAdd: async (req, res) => {
+    try {
+      const { id } = req.params;
+      const { position, company_name, started, ended, exp_description } = req.body;
+      const experienceCheck = await experienceModel.detail(id);
+      const photo = req.file.filename;
+      console.log('rows: ', experienceCheck.rows);
+      if (experienceCheck.rowCount > 0) {
+        const previousData = {
+          position: "",
+          company_name: "",
+          started: "",
+          ended: "",
+          photo: "",
+          exp_description: ""
+        }
+        experienceCheck.rows.map(val => {
+          previousData.position = val.position;
+          previousData.company_name = val.company_name;
+          previousData.started = val.started;
+          previousData.ended = val.ended;
+          previousData.photo = val.photo;
+          previousData.exp_description = val.exp_description;
+        })
+        console.log('previousData: ', previousData);
+        const data = {
+          id,
+          position: previousData.position.concat(",", position),
+          company_name: previousData.company_name.concat(",", company_name),
+          started: previousData.started.concat(",", started),
+          ended: previousData.ended.concat(",", ended),
+          photo: previousData.photo.concat(",", photo),
+          exp_description: previousData.exp_description.concat(",", exp_description)
+        };
+        await experienceModel.updateExperience(data);
+        success(res, {
+          code: 200,
+          status: 'success',
+          message: 'Success update experience',
+          data: experienceCheck.rows[0],
+        });
+      } else {
+        failed(res, {
+          code: 404,
+          status: 'error',
+          message: `experience with id ${id} not found`,
+          error: [],
+        });
+        return;
+      }
+    } catch (error) {
+      failed(res, {
+        code: 500,
+        status: 'error',
+        message: error.message,
+        error: [],
+      });
+    }
+  },
   experienceDelete: async (req, res) => {
     try {
       const { id } = req.params;
