@@ -21,8 +21,16 @@ const workerModel = {
     ) => {
         return new Promise((resolve, reject) => {
             db.query(
-                `SELECT * FROM worker WHERE LOWER(name) LIKE '%${searchQuery}%'
-          ORDER BY ${sortQuery} ${modeQuery} LIMIT ${limitValue} OFFSET ${offsetValue}`,
+                `SELECT worker.id, worker.name, worker.email, worker.phone, worker.password, 
+                worker.domicile, worker.workplace, worker.job_desk, worker.worker_description, worker.photo,
+                worker.verify_token, worker.skills, portfolio.portfolio_name, portfolio.link, portfolio.type,
+                portfolio.photo, portfolio.porto_description, experience.position, experience.company_name,
+                experience.started, experience.ended, experience.photo, experience.exp_description 
+                FROM worker
+                LEFT JOIN portfolio ON worker.portfolio_id = portfolio.id
+                LEFT JOIN experience ON worker.experience_id = experience.id
+                WHERE LOWER(worker.name) LIKE '%${searchQuery}%'
+                ORDER BY ${sortQuery} ${modeQuery} LIMIT ${limitValue} OFFSET ${offsetValue}`,
                 (err, res) => {
                     if (err) {
                         reject(err);
@@ -35,7 +43,16 @@ const workerModel = {
     },
     detail: (id) => {
         return new Promise((resolve, reject) => {
-            db.query(`SELECT * FROM worker WHERE id='${id}'`, (err, res) => {
+            db.query(
+            `SELECT worker.id, worker.name, worker.email, worker.phone, worker.password, 
+            worker.domicile, worker.workplace, worker.job_desk, worker.worker_description, worker.photo,
+            worker.verify_token, worker.skills, portfolio.portfolio_name, portfolio.link, portfolio.type,
+            portfolio.photo, portfolio.porto_description, experience.position, experience.company_name,
+            experience.started, experience.ended, experience.photo, experience.exp_description 
+            FROM worker 
+            LEFT JOIN portfolio ON worker.portfolio_id = portfolio.id
+            LEFT JOIN experience ON worker.experience_id = experience.id
+            WHERE worker.id='${id}'`, (err, res) => {
                 if (err) {
                     reject(err);
                 } else {
@@ -45,11 +62,12 @@ const workerModel = {
         });
     },
     workersUpdateData: (data) => {
-        const { id, name, job_desk, domicile, workplace, description, skill_id, portfolio_id, experience_id } = data;
+        const { id, name, job_desk, domicile, workplace, description, skills, portfolio_id, experience_id } = data;
+        console.log('data: ', data);
         return new Promise((resolve, reject) => {
             db.query(
                 `UPDATE worker SET name='${name}',job_desk='${job_desk}', domicile='${domicile}', 
-            workplace='${workplace}', description='${description}', skill_id='${skill_id}', portfolio_id='${portfolio_id}', experience_id='${experience_id}'
+            workplace='${workplace}', worker_description='${description}', skills='${skills}', portfolio_id='${portfolio_id}', experience_id='${experience_id}'
             WHERE id='${id}'`,
                 (err, res) => {
                     if (err) {

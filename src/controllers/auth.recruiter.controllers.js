@@ -2,7 +2,7 @@ const bcrypt = require('bcryptjs');
 const { v4: uuidv4 } = require('uuid');
 const crypto = require('crypto');
 const jwtToken = require('../helpers/generateJWTToken');
-const { success, failed } = require('../helpers/response');
+const { success, failed, successLogin } = require('../helpers/response');
 const authModelRecruiter = require('../models/auth.recruiter.models');
 
 const authController = {

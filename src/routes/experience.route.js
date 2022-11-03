@@ -6,6 +6,7 @@ const {
   experienceDetail,
   experienceInsert,
   experienceUpdate,
+  experienceAdd,
   experienceDelete,
 //   workersUpdatePhoto,
 } = require('../controllers/experience.controllers');
@@ -22,6 +23,7 @@ router
   .get('/:id', jwtAuth, experienceDetail) // to get experience detail by id
   .post('/', jwtAuth, upload, experienceInsert) // to get create experience detail by id
   .put('/:id', jwtAuth, upload, validationResult, experienceUpdate) // to update information experience
+  .put('/add/:id', jwtAuth, upload, validationResult, experienceAdd) // to add more experience
   .delete('/:id', jwtAuth, experienceDelete) // to delete experience by id
 
   module.exports = router;
