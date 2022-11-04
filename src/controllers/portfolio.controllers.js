@@ -153,8 +153,7 @@ const portfolioController = {
           link,
           type,
           photo,
-          description,
-          user_id
+          description
         };
 
         await portfolioModel.updatePortfolio(data);
