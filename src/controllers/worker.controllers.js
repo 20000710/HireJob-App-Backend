@@ -10,7 +10,7 @@ const workerController = {
       const pageValue = page ? Number(page) : 1;
       const limitValue = limit ? Number(limit) : 5;
       const offsetValue = (pageValue - 1) * limitValue;
-      const sortQuery = sort ? sort : 'worker.name';
+      const sortQuery = sort ? sort : 'name';
       const modeQuery = mode ? mode : 'ASC';
       if (typeof Number(page) == 'number' && typeof Number(limit) == 'number') {
         const allData = await workersModel.allData()
@@ -23,69 +23,6 @@ const workerController = {
           sortQuery,
           modeQuery,
         );
-        console.log('res: ', result)
-        const data = {
-          id: "",
-          name: "",
-          email: "",
-          phone: "",
-          password: "",
-          skills: "",
-          photo: "",
-          domicile: "",
-          workplace: "",
-          job_desk: "",
-          description: ""
-        }
-
-        const experience = {
-          position: "",
-          company_name: "",
-          started: "",
-          ended: "",
-          photo: "",
-          description: ""
-        }
-
-        const portfolio = {
-          link: "",
-          type: "",
-          photo: "",
-          description: "",
-          portfolio_name: ""
-        }
-
-        // mapping to show data worker
-        result.rows.map((val) => {
-          data.id = val.id
-          data.name = val.name
-          data.email = val.email
-          data.phone = val.phone
-          data.password = val.password
-          data.skills = val.skills
-          data.photo = val.photo
-          data.domicile = val.domicile
-          data.workplace = val.workplace
-          data.job_desk = val.job_desk
-          data.description = val.worker_description
-        })
-        // mapping to show data experience
-        result.rows.map((val) => {
-          experience.position = val.position
-          experience.company_name = val.company_name
-          experience.started = val.started
-          experience.ended = val.ended
-          experience.photo = val.photo
-          experience.description = val.exp_description
-        })
-        // mapping to show data portfolio
-        result.rows.map((val) => {
-          portfolio.link = val.link
-          portfolio.type = val.type
-          portfolio.photo = val.photo
-          portfolio.description = val.porto_description
-          portfolio.portfolio_name = val.portfolio_name
-        })
 
         const dataPerPage =
           limitValue > result.rowCount ? result.rowCount : limitValue;
@@ -100,7 +37,7 @@ const workerController = {
               code: 200,
               status: 'success',
               message: 'Success get all workers',
-              data: data,
+              data: result.rows,
               pagination,
             });
           } else {
@@ -117,13 +54,11 @@ const workerController = {
             dataPerPage: dataPerPage,
             totalPage: Math.ceil(totalData / limitValue),
           };
-          successWorker(res, {
+          success(res, {
             code: 200,
             status: 'success',
-            message: `Success get all users`,
-            data: [data],
-            experience: [experience],
-            portfolio: [portfolio],
+            message: 'Success get all workers',
+            data: result.rows,
             pagination,
           });
         }

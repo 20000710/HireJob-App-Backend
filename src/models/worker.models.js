@@ -21,15 +21,7 @@ const workerModel = {
     ) => {
         return new Promise((resolve, reject) => {
             db.query(
-                `SELECT worker.id, worker.name, worker.email, worker.phone, worker.password, 
-                worker.domicile, worker.workplace, worker.job_desk, worker.worker_description, worker.photo,
-                worker.verify_token, worker.skills, portfolio.portfolio_name, portfolio.link, portfolio.type,
-                portfolio.photo, portfolio.porto_description, experience.position, experience.company_name,
-                experience.started, experience.ended, experience.photo, experience.exp_description 
-                FROM worker
-                LEFT JOIN portfolio ON worker.portfolio_id = portfolio.id
-                LEFT JOIN experience ON worker.experience_id = experience.id
-                WHERE LOWER(worker.name) LIKE '%${searchQuery}%'
+                `SELECT * FROM worker WHERE LOWER(worker.name) LIKE '%${searchQuery}%'
                 ORDER BY ${sortQuery} ${modeQuery} LIMIT ${limitValue} OFFSET ${offsetValue}`,
                 (err, res) => {
                     if (err) {
