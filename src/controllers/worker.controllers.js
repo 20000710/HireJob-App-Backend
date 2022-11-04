@@ -133,7 +133,7 @@ const workerController = {
         })
         // mapping to show data experience
         result.rows.map((val) => {
-          experience.id = val.id
+          experience.id = val.experience_id
           experience.position = val.position
           experience.company_name = val.company_name
           experience.started = val.started
@@ -143,7 +143,7 @@ const workerController = {
         })
         // mapping to show data portfolio
         result.rows.map((val) => {
-          portfolio.id = val.id
+          portfolio.id = val.portfolio_id
           portfolio.link = val.link
           portfolio.type = val.type
           portfolio.photo = val.photo
