@@ -91,7 +91,7 @@ const workerController = {
           phone: "",
           password: "",
           skills: "",
-          photo: "",
+          photo_worker: "",
           domicile: "",
           workplace: "",
           job_desk: "",
@@ -123,7 +123,7 @@ const workerController = {
           data.phone = val.phone
           data.password = val.password
           data.skills = val.skills
-          data.photo = val.photo
+          data.photo_worker = val.photo_worker
           data.domicile = val.domicile
           data.workplace = val.workplace
           data.job_desk = val.job_desk
