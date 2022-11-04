@@ -37,7 +37,7 @@ const workerModel = {
         return new Promise((resolve, reject) => {
             db.query(
             `SELECT worker.id, worker.name, worker.email, worker.phone, worker.password, 
-            worker.domicile, worker.workplace, worker.job_desk, worker.worker_description, worker.photo,
+            worker.domicile, worker.workplace, worker.job_desk, worker.worker_description, worker.photo_worker,
             worker.verify_token, worker.skills, portfolio.portfolio_name, portfolio.link, portfolio.type,
             portfolio.photo, portfolio.porto_description, experience.position, experience.company_name,
             experience.started, experience.ended, experience.photo, experience.exp_description 
@@ -74,7 +74,7 @@ const workerModel = {
     workersUpdatePhotoData: (data) => {
         const { id, photo } = data;
         return new Promise((resolve, reject) => {
-            db.query(`UPDATE worker SET photo='${photo}' WHERE id='${id}'`,
+            db.query(`UPDATE worker SET photo_worker='${photo}' WHERE id='${id}'`,
                 (err, res) => {
                     if (err) {
                         reject(err);
