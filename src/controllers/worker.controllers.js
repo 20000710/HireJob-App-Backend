@@ -91,7 +91,7 @@ const workerController = {
           phone: "",
           password: "",
           skills: "",
-          photo_worker: "",
+          photo: "",
           domicile: "",
           workplace: "",
           job_desk: "",
@@ -123,7 +123,7 @@ const workerController = {
           data.phone = val.phone
           data.password = val.password
           data.skills = val.skills
-          data.photo_worker = val.photo_worker
+          data.photo = val.photo_worker
           data.domicile = val.domicile
           data.workplace = val.workplace
           data.job_desk = val.job_desk
@@ -151,7 +151,7 @@ const workerController = {
           code: 200,
           status: 'success',
           message: 'Success get worker by id',
-          data: [data],
+          data: data,
           experience: [experience],
           portfolio: [portfolio],
         });
