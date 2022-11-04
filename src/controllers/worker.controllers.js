@@ -99,7 +99,7 @@ const workerController = {
         }
 
         const experience = {
-          id: "",
+          exp_id: "",
           position: "",
           company_name: "",
           started: "",
@@ -109,14 +109,14 @@ const workerController = {
         }
 
         const portfolio = {
-          id: "",
+          porto_id: "",
           link: "",
           type: "",
           photo: "",
           description: "",
           portfolio_name: ""
         }
-
+        console.log('rows: ', result.rows);
         // mapping to show data worker
         result.rows.map((val) => {
           data.id = val.id
@@ -133,7 +133,7 @@ const workerController = {
         })
         // mapping to show data experience
         result.rows.map((val) => {
-          experience.id = val.experience_id
+          experience.exp_id = val.experience_id
           experience.position = val.position
           experience.company_name = val.company_name
           experience.started = val.started
@@ -143,7 +143,7 @@ const workerController = {
         })
         // mapping to show data portfolio
         result.rows.map((val) => {
-          portfolio.id = val.portfolio_id
+          portfolio.porto_id = val.portfolio_id
           portfolio.link = val.link
           portfolio.type = val.type
           portfolio.photo = val.photo
