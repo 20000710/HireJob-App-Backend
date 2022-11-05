@@ -142,7 +142,7 @@ const experienceController = {
   experienceUpdate: async (req, res) => {
     try {
       const { id } = req.params;
-      const { position, company_name, started, ended, description } = req.body;
+      const { position, company_name, started, ended, exp_description } = req.body;
       const experienceCheck = await experienceModel.detail(id);
       const photo = req.file.filename;
       if (experienceCheck.rowCount > 0) {
@@ -153,7 +153,7 @@ const experienceController = {
           started,
           ended,
           photo,
-          description
+          exp_description
         };
         await experienceModel.updateExperience(data);
         success(res, {
