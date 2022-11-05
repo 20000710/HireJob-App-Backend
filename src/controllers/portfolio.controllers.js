@@ -142,7 +142,7 @@ const portfolioController = {
   portfolioUpdate: async (req, res) => {
     try {
       const { id } = req.params;
-      const { name, link, type, description} = req.body;
+      const { name, link, type, porto_description} = req.body;
       const portfolioCheck = await portfolioModel.detail(id);
       const photo = req.file.filename;
       console.log('portfolioCheck: ', portfolioCheck);
@@ -153,7 +153,7 @@ const portfolioController = {
           link,
           type,
           photo,
-          description
+          porto_description
         };
 
         await portfolioModel.updatePortfolio(data);
