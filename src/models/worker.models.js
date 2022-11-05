@@ -42,8 +42,8 @@ const workerModel = {
             portfolio.photo, portfolio.porto_description, experience.position, experience.company_name,
             experience.started, experience.ended, experience.photo, experience.exp_description 
             FROM worker 
-            LEFT JOIN portfolio ON worker.portfolio_id = portfolio.id
-            LEFT JOIN experience ON worker.experience_id = experience.id
+            INNER JOIN portfolio ON worker.portfolio_id = portfolio.id
+            INNER JOIN experience ON worker.experience_id = experience.id
             WHERE worker.id='${id}'`, (err, res) => {
                 if (err) {
                     reject(err);
