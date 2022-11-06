@@ -22,8 +22,9 @@ const workerModel = {
         return new Promise((resolve, reject) => {
             db.query(
                 `SELECT * FROM worker WHERE (LOWER(name) LIKE '%${searchQuery}%') 
-                OR (LOWER(domicile) LIKE '%${searchQuery}%' )
-                OR (LOWER(job_desk) LIKE '%${searchQuery}%' ) 
+                OR (LOWER(domicile) LIKE '%${searchQuery}%')
+                OR (LOWER(job_desk) LIKE '%${searchQuery}%') 
+                OR (LOWER(skills) LIKE '%${searchQuery}%') 
                 ORDER BY ${sortQuery} ${modeQuery} LIMIT ${limitValue} OFFSET ${offsetValue}`,
                 (err, res) => {
                     if (err) {
