@@ -138,7 +138,7 @@ const workerController = {
           experience.company_name = val.company_name
           experience.started = val.started
           experience.ended = val.ended
-          experience.photo = val.photo
+          experience.photo = val.photo_exp
           experience.description = val.exp_description
         })
         // mapping to show data portfolio
@@ -146,7 +146,7 @@ const workerController = {
           portfolio.porto_id = val.portfolio_id
           portfolio.link = val.link
           portfolio.type = val.type
-          portfolio.photo = val.photo
+          portfolio.photo = val.photo_porto
           portfolio.description = val.porto_description
           portfolio.portfolio_name = val.portfolio_name
         })
