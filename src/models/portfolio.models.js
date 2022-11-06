@@ -48,7 +48,7 @@ const portfolioModel = {
         const {id, name, link, type, photo, description} = data
         return new Promise ((resolve, reject) =>
             db.query(`
-            INSERT INTO portfolio (id, portfolio_name, link, type, photo, porto_description) 
+            INSERT INTO portfolio (id, portfolio_name, link, type, photo_porto, porto_description) 
             VALUES ('${id}', '${name}', '${link}', '${type}', '${photo}', 
             '${description}', '${user_id}')`, (error,result) => {
                 if(!error){
@@ -64,7 +64,7 @@ const portfolioModel = {
         return new Promise((resolve, reject) => {
             db.query(
             `UPDATE portfolio SET portfolio_name='${name}',link='${link}', 
-            type='${type}', photo='${photo}', porto_description='${porto_description}' 
+            type='${type}', photo_porto='${photo}', porto_description='${porto_description}' 
             WHERE id='${id}'`,
                 (err, res) => {
                     if (err) {
