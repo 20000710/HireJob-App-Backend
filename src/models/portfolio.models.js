@@ -50,7 +50,7 @@ const portfolioModel = {
             db.query(`
             INSERT INTO portfolio (id, portfolio_name, link, type, photo_porto, porto_description) 
             VALUES ('${id}', '${name}', '${link}', '${type}', '${photo}', 
-            '${description}', '${user_id}')`, (error,result) => {
+            '${description}')`, (error,result) => {
                 if(!error){
                     resolve(result)
                 }else{
