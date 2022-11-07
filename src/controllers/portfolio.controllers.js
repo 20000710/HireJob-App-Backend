@@ -110,7 +110,7 @@ const portfolioController = {
   },
   portfolioInsert: async (req, res) => {
     try {
-    const { name, link, type, description, user_id } = req.body;
+    const { name, link, type, description } = req.body;
       const id = uuidv4();
       const photo = req.file.filename;
       const data = {
@@ -119,8 +119,7 @@ const portfolioController = {
         link,
         type,
         photo,
-        description,
-        user_id
+        description
       };
       console.log('data: ', data)
       await portfolioModel.insertPortfolio(data);
@@ -131,6 +130,7 @@ const portfolioController = {
         data: data,
       });
     } catch (error) {
+      console.log(error);
       failed(res, {
         code: 500,
         status: 'error',
