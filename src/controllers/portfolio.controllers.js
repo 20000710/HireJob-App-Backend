@@ -2,6 +2,7 @@ const { success, failed } = require('../helpers/response');
 const deleteFile = require('../helpers/deleteFile');
 const portfolioModel = require('../models/portfolio.models');
 const { v4: uuidv4 } = require('uuid');
+const cloudinary = require('../middlewares/cloudinary');
 
 const portfolioController = {
   getAllPortfolio: async (req, res) => {
@@ -112,7 +113,8 @@ const portfolioController = {
     try {
     const { name, link, type, description } = req.body;
       const id = uuidv4();
-      const photo = req.file.filename;
+      const result = await cloudinary.uploader.upload(req.file.path)
+      const photo = result.secure_url;
       const data = {
         id,
         name,
@@ -143,10 +145,11 @@ const portfolioController = {
     try {
       const { id } = req.params;
       const { name, link, type, porto_description} = req.body;
-      const portfolioCheck = await portfolioModel.detail(id);
-      const photo = req.file.filename;
+      const portfolioCheck = await portfolioModel.detail(id)      
       console.log('portfolioCheck: ', portfolioCheck);
       if (portfolioCheck.rowCount > 0) {
+        const result = await cloudinary.uploader.upload(req.file.path)
+        const photo = result.secure_url
         const data = {
           id,
           name,
