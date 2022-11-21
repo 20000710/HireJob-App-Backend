@@ -2,6 +2,7 @@ const { success, failed } = require('../helpers/response');
 const deleteFile = require('../helpers/deleteFile');
 const experienceModel = require('../models/experience.models');
 const { v4: uuidv4 } = require('uuid');
+const cloudinary = require('../middlewares/cloudinary');
 
 const experienceController = {
   getAllExperience: async (req, res) => {
@@ -112,7 +113,8 @@ const experienceController = {
     try {
       const { position, company_name, started, ended, description } = req.body;
       const id = uuidv4();
-      const photo = req.file.filename;
+      const result = await cloudinary.uploader.upload(req.file.path)
+      const photo = result.secure_url;
       const data = {
         id,
         position,
@@ -144,8 +146,9 @@ const experienceController = {
       const { id } = req.params;
       const { position, company_name, started, ended, exp_description } = req.body;
       const experienceCheck = await experienceModel.detail(id);
-      const photo = req.file.filename;
       if (experienceCheck.rowCount > 0) {
+        const result = await cloudinary.uploader.upload(req.file.path)
+        const photo = result.secure_url;
         const data = {
           id,
           position,

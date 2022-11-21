@@ -1,6 +1,7 @@
 const { success, failed, successWorker } = require('../helpers/response');
 const deleteFile = require('../helpers/deleteFile');
 const workersModel = require('../models/worker.models');
+const cloudinary = require('../middlewares/cloudinary');
 
 const workerController = {
   getAllWorkers: async (req, res) => {
@@ -227,10 +228,12 @@ const workerController = {
       const { id } = req.params;
       let photo;
       if (req.file) {
+        // upload image to cloudinary
+        const result = await cloudinary.uploader.upload(req.file.path)
         const usersCheck = await workersModel.detail(id);
         if (usersCheck.rowCount > 0) {
           if (usersCheck.rows[0].photo == null) {
-            photo = req.file.filename;
+            photo = result.secure_url;
             const data = {
               id,
               photo,
